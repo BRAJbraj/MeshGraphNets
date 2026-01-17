@@ -1,8 +1,8 @@
 # PressNet: Mesh-Based Simulation with Graph Neural Networks
 
-![Python](https://img.shields.io/badge/Python-3.7%2B-blue)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-1.15-orange)
-![Status](https://img.shields.io/badge/Status-Proof_of_Concept-yellow)
+![Python](https://img.shields.io/badge/Python-3.7-blue.svg)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-1.15-orange.svg)
+![Status](https://img.shields.io/badge/Status-Proof_of_Concept-yellow.svg)
 
 > **🚧 Work in Progress:** This repository is currently in the **validation phase**. The model has been successfully trained on a single data group (`group_0`) to verify its ability to capture nonlinear deformation dynamics. Scaling to larger trajectory sets is the next step.
 
@@ -20,7 +20,7 @@ The GIFs below demonstrate that the model **successfully learned the deformation
 
 | View 1: Deformation Dynamics | View 2: Stress/Strain Visualization |
 | :---: | :---: |
-| ![Deformation GIF](images/rollout_pressnet_rollout_group0_50k_radius_25_result.gif) | *Coming Soon* |
+| <img src="images/rollout_pressnet_rollout_group0_50k_radius_25_result.gif" width="100%"> | *Coming Soon* |
 
 *(Note: These results represent the model over-fitting to `group_0` as a sanity check before scaling up to the full dataset.)*
 
@@ -37,18 +37,18 @@ The GIFs below demonstrate that the model **successfully learned the deformation
 
 ## 🛠️ Installation
 
-1.  Clone the repository:
+1.  **Clone the repository:**
     ```bash
     git clone [https://github.com/your-username/pressnet-meshgraphnets.git](https://github.com/your-username/pressnet-meshgraphnets.git)
     cd pressnet-meshgraphnets
     ```
 
-2.  Install dependencies:
+2.  **Install dependencies:**
     ```bash
     pip install -r requirements.txt
     ```
 
-3.  Download the dataset:
+3.  **Download the dataset:**
     * *Data is currently private/local. Place `meta.json`, `train.tfrecord`, and `valid.tfrecord` files in your dataset directory (e.g., `./data/`).*
     * **Dataset Details:** For a detailed breakdown of the data structure, variable normalization, and mesh properties, please refer to the [PressNet Dataset Specifications](https://github.com/AnK-Accelerated-Komputing/PressNet/tree/main/datasets#details-of-pressnet-dataset).
 
@@ -57,16 +57,17 @@ The GIFs below demonstrate that the model **successfully learned the deformation
 ### Training
 To train the model on the dataset:
 
+```bash
 python pressnet_run_model.py \
   --mode=train \
   --model=pressnet \
   --dataset_dir=./data \
   --checkpoint_dir=./checkpoints \
   --batch_size=2
-
-
 Evaluation
 To run a rollout and generate a trajectory file from the saved best_model:
+
+Bash
 
 python pressnet_run_model.py \
   --mode=eval \
@@ -74,7 +75,6 @@ python pressnet_run_model.py \
   --dataset_dir=./data \
   --checkpoint_dir=./checkpoints \
   --rollout_path=output/rollout.pkl
-
 📉 Development Roadmap
 I am currently working on the following improvements:
 
