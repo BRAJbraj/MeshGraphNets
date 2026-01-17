@@ -20,7 +20,7 @@ The GIFs below demonstrate that the model **successfully learned the deformation
 
 | View 1: Deformation Dynamics | View 2: Stress/Strain Visualization |
 | :---: | :---: |
-| ![Deformation GIF](path/to/your/first_gif.gif) | ![Stress GIF](path/to/your/second_gif.gif) |
+| ![Deformation GIF](images/rollout_pressnet_rollout_group0_50k_radius_25_result.gif) | *Coming Soon* |
 
 *(Note: These results represent the model over-fitting to `group_0` as a sanity check before scaling up to the full dataset.)*
 
