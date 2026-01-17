@@ -1,0 +1,8 @@
+tensorflow-gpu==1.15.0
+dm-sonnet==1.36
+graph_nets>=1.1.0
+absl-py
+matplotlib
+numpy
+scipy
+torch
