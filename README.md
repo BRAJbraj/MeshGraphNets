@@ -115,4 +115,4 @@ Original Paper: "Learning Mesh-Based Simulation with Graph Networks" by Pfaff et
 
 DeepMind Implementation: Heavily inspired by the official DeepMind research repository.
 
-* **PressNet Dataset:** [Dataset Specifications](https://github.com/AnK-Accelerated-Komputing/PressNet/tree/01d727a1e1c604c8f82058b4392b7f1eb3c08717/datasets#details-of-pressnet-dataset).
+* **PressNet Dataset:** [Dataset Specifications](https://github.com/AnK-Accelerated-Komputing/PressNet/tree/01d727a1e1c604c8f82058b4392b7f1eb3c08717/datasets#details-of-pressnet-dataset)
