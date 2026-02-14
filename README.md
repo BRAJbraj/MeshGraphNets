@@ -2,29 +2,32 @@
 
 ![Python](https://img.shields.io/badge/Python-3.7-blue.svg)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-1.15-orange.svg)
-![Status](https://img.shields.io/badge/Status-Proof_of_Concept-yellow.svg)
+![Status](https://img.shields.io/badge/Status-Results_Available-brightgreen.svg)
 
-> **🚧 Work in Progress:** This repository is currently in the **validation phase**. The model has been successfully trained on a single data group (`group_0`) to verify its ability to capture nonlinear deformation dynamics. Scaling to larger trajectory sets is the next step.
+> **🚀 Project Status:** Successful inference on the PressNet dataset. The model has established a new baseline for the **400-step coarse** variant of the dataset.
 
 ## 📌 Overview
-**PressNet** is an implementation of **MeshGraphNets** (based on the paper by DeepMind) tailored for simulating complex physical deformations, specifically focusing on **industrial metal pressing and nonlinear material deformation**.
+This repository contains a **MeshGraphNet** implementation (based on the DeepMind architecture) tailored for simulating **non-linear structural deformation** on the **PressNet** dataset.
 
-The goal of this project is to learn mesh-based simulations using Graph Neural Networks (GNNs). The current implementation handles the interaction between "Tool" (kinematic) and "Metal" (dynamic) meshes using a hybrid velocity approach.
+The goal is to accelerate Finite Element Method (FEM) solvers by using Graph Neural Networks (GNNs) to predict the interaction between the kinematic "Tool" and the dynamic "Metal" meshes.
 
 ---
 
-## 🎥 Preliminary Results (Proof of Concept)
-*Current progress: The model was trained on `group_0` data to test if the GNN architecture could successfully capture the nonlinearity of the deformation.*
+## 📊 Experimental Results (PressNet Coarse Variant)
 
-The GIFs below demonstrate that the model **successfully learned the deformation mechanics** for this specific group, validating the core architecture.
+Unlike the original PressNet paper which focuses on the 1500-step dataset, this implementation establishes a strong baseline for the **400-step coarse simulation task**.
 
-| View 1: Deformation Dynamics | View 2: Stress/Strain Visualization |
+### Key Metrics (Tested on 29 Trajectories)
+* **Average RMSE:** `1.88 mm`
+* **Average Max RMSE:** `2.92 mm`
+* **Stability:** Stable rollouts achieved for the full **400 time steps**.
+
+### Visualization
+The GIFs below demonstrate the model's ability to capture the non-linear deformation dynamics and contact physics between the die and the plate.
+
+| Trajectory 0 (Step 222k) | Trajectory 18 (Step 222k) |
 | :---: | :---: |
-| | View 1: Deformation Dynamics | View 2: Stress/Strain Visualization |
-| :---: | :---: |
-| <img src="./images/rollout_pressnet_rollout_group0_50k_radius_25_result.gif" width="100%"> | *Coming Soon* |
-
-*(Note: Model Capacity Verification: These results demonstrate the architecture's ability to fully capture non-linear dynamics on a controlled subset (group_0). This successful "overfit" confirms the model's theoretical capacity before the ongoing generalization phase.)*
+| <img src="images/step_222001_traj_0.gif" width="100%"> | <img src="images/step_222001_traj_18.gif" width="100%"> |
 
 ---
 
@@ -50,9 +53,9 @@ The GIFs below demonstrate that the model **successfully learned the deformation
     pip install -r requirements.txt
     ```
 
-3.  **Download the dataset:**
-    * *Data is currently private/local. Place `meta.json`, `train.tfrecord`, and `valid.tfrecord` files in your dataset directory (e.g., `./data/`).*
-    * **Dataset Details:** For a detailed breakdown of the data structure, variable normalization, and mesh properties, please refer to the [PressNet Dataset Specifications](https://github.com/AnK-Accelerated-Komputing/PressNet/tree/main/datasets#details-of-pressnet-dataset).
+3.  **Dataset Setup:**
+    * Place `meta.json`, `train.tfrecord`, and `valid.tfrecord` files in your dataset directory (e.g., `./data/`).
+    * **Dataset Variant:** This model was trained on the `15x10_400steps_coarse_data` variant.
 
 ## 💻 Usage
 
@@ -70,7 +73,6 @@ Evaluation
 To run a rollout and generate a trajectory file from the saved best_model:
 
 Bash
-
 python pressnet_run_model.py \
   --mode=eval \
   --model=pressnet \
@@ -78,27 +80,29 @@ python pressnet_run_model.py \
   --checkpoint_dir=./checkpoints \
   --rollout_path=output/rollout.pkl
 📉 Development Roadmap
-I am currently working on the following improvements:
+Current Status:
 
-[x] Core Architecture: Implement Encoder, Processor (Message Passing), and Decoder.
-
-[x] Proof of Concept: Verify model can capture nonlinearity on single-group data (group_0).
+[x] Core Architecture: Implemented Encoder, Processor (Message Passing), and Decoder.
 
 [x] Data Loading: Efficient TFRecord parsing with history buffering.
 
 [x] Training Logic: Integrated Early Stopping and "Best Model" saving.
 
-[ ] Scaling Up: Train on higher number of trajectories (multi-group) to generalize the physics.
+[x] Validation: Validated on 400-step coarse dataset with <2mm average error.
 
-[ ] Main Dataset Integration: Final training on the complete industrial dataset.
+Future Work:
 
-[ ] Long-term Stability: Reducing error accumulation over long rollouts (>500 steps).
+[ ] High Fidelity: Scaling training to the 1500-step fine-mesh dataset.
+
+[ ] Curvature Optimization: Further reducing error in high-curvature regions of the die.
+
+[ ] Generalization: Testing on unseen die geometries not present in the training set.
 
 📚 Acknowledgements & References
-This project is built upon the foundational research in graph-based physical simulations.
+This project is built upon foundational research in graph-based physical simulations.
 
-Original Paper: "Learning Mesh-Based Simulation with Graph Networks" by Pfaff et al. (ICML 2021). Read here.
+Original Paper: "Learning Mesh-Based Simulation with Graph Networks" by Pfaff et al. (ICML 2021).
 
-DeepMind Implementation: This code is heavily inspired by the official DeepMind research repository. View Repository.
+DeepMind Implementation: Heavily inspired by the official DeepMind research repository.
 
-PressNet Dataset: Specifications and data handling protocols. View Details.
+PressNet Dataset: Dataset Specifications.
