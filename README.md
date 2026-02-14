@@ -13,21 +13,31 @@ The goal is to accelerate Finite Element Method (FEM) solvers by using Graph Neu
 
 ---
 
-## 📊 Experimental Results (PressNet Coarse Variant)
+## 📊 Experimental Results
 
-Unlike the original PressNet paper which focuses on the 1500-step dataset, this implementation establishes a strong baseline for the **400-step coarse simulation task**.
+### 1. Current Best: Generalized Model (Test Set)
+*Phase: Generalization*
 
-### Key Metrics (Tested on 29 Trajectories)
+Unlike the initial proof-of-concept, this model successfully generalizes across **29 unseen trajectories** in the test set. It establishes a strong baseline for the **400-step coarse simulation task**.
+
 * **Average RMSE:** `1.88 mm`
 * **Average Max RMSE:** `2.92 mm`
 * **Stability:** Stable rollouts achieved for the full **400 time steps**.
 
-### Visualization
-The GIFs below demonstrate the model's ability to capture the non-linear deformation dynamics and contact physics between the die and the plate.
-
 | Trajectory 0 (Step 222k) | Trajectory 18 (Step 222k) |
 | :---: | :---: |
 | <img src="images/step_222001_traj_0.gif" width="100%"> | <img src="images/step_222001_traj_18.gif" width="100%"> |
+
+<br>
+
+### 2. Early Development: Proof of Concept (Group 0)
+*Phase: Architecture Validation*
+
+Before scaling to the full dataset, the architecture was validated on a single data group (`group_0`) to ensure it could capture the non-linear physics of the die stamping process. These results demonstrate the model's ability to learn the specific deformation mechanics of a single shape.
+
+| Proof of Concept (Single Group Overfit) |
+| :---: |
+| <img src="images/rollout_pressnet_rollout_group0_50k_radius_25_result.gif" width="100%"> |
 
 ---
 
@@ -86,9 +96,9 @@ Current Status:
 
 [x] Data Loading: Efficient TFRecord parsing with history buffering.
 
-[x] Training Logic: Integrated Early Stopping and "Best Model" saving.
+[x] Proof of Concept: Verified non-linear capture on single-group data (Group 0).
 
-[x] Validation: Validated on 400-step coarse dataset with <2mm average error.
+[x] Validation: Validated generalization on full 400-step coarse dataset with <2mm average error.
 
 Future Work:
 
